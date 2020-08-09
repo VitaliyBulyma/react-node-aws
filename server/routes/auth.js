@@ -1,16 +1,36 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 // import validators
-const {userRegisterValidator, userLoginValidator} = require('../validators/auth');
-const {runValidation} = require('../validators');
+const {
+  userRegisterValidator,
+  userLoginValidator,
+  resetPasswordValidator,
+  forgotPasswordValidator,
+} = require("../validators/auth");
+const { runValidation } = require("../validators");
 
+const {
+  register,
+  registerActivate,
+  login,
+  requireSignin,
+  forgotPassword, 
+  resetPassword
+} = require("../controllers/auth");
 
-
-
-const {register, registerActivate, login} = require('../controllers/auth');
-
-router.post('/register', userRegisterValidator, runValidation, register);
-router.post('/register/activate', registerActivate);
-router.post('/login', userLoginValidator, runValidation, login);
-
-module.exports= router;
+router.post("/register", userRegisterValidator, runValidation, register);
+router.post("/register/activate", registerActivate);
+router.post("/login", userLoginValidator, runValidation, login);
+router.put('/forgot-password', forgotPasswordValidator, runValidation, forgotPassword);
+router.put(
+  "/reset-password",
+  resetPasswordValidator,
+  runValidation,
+  resetPassword
+);
+// router.get('/secret', requireSignin, (req, res)=>{
+//     res.json({
+//         data: 'This is secret Page'
+//     });
+// });
+module.exports = router;
