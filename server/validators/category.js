@@ -20,5 +20,5 @@ exports.categoryUpdateValidator = [
         .withMessage('Name is required'),
     check('content')
         .isLength({ min: 20 })
-        .withMessage('Content is required')
+        .withMessage('Content is required, minimum 20 characters long')
 ];
