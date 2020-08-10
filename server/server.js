@@ -11,13 +11,15 @@ const app = express();
 // db
 mongoose.connect(process.env.DATABASE_CLOUD, {
     useNewUrlParser: true,
-    useUnifiedTopology: true  
+    useUnifiedTopology: true, 
+    useCreateIndex: true
 })
 .then(()=>console.log("Database is connected!"))
 .catch(err=> console.log(err));
 // import routes
 const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/user');
+const categoryRoutes = require('./routes/category');
 
 // app midllewares
 app.use(morgan('dev'));
@@ -27,6 +29,7 @@ app.use(cors({origin:process.env.CLIENT_URL}));
 // middleware
 app.use('/api', authRoutes);
 app.use('/api', userRoutes);
+app.use('/api', categoryRoutes);
 
 const PORT = process.env.PORT || 8000;
 
