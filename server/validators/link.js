@@ -20,7 +20,7 @@ exports.linkCreateValidator = [
     check('medium')
         .not()
         .isEmpty()
-        .withMessage('Pick a medium video/book')
+        .withMessage('Pick a medium video/text')
 ];
 
 exports.linkUpdateValidator = [
@@ -43,5 +43,5 @@ exports.linkUpdateValidator = [
     check('medium')
         .not()
         .isEmpty()
-        .withMessage('Pick a medium video/book')
+        .withMessage('Pick a medium video/text')
 ];
