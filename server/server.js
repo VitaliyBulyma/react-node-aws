@@ -12,7 +12,8 @@ const app = express();
 mongoose.connect(process.env.DATABASE_CLOUD, {
     useNewUrlParser: true,
     useUnifiedTopology: true, 
-    useCreateIndex: true
+    useCreateIndex: true, 
+    useFindAndModify: false
 })
 .then(()=>console.log("Database is connected!"))
 .catch(err=> console.log(err));
@@ -20,6 +21,7 @@ mongoose.connect(process.env.DATABASE_CLOUD, {
 const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/user');
 const categoryRoutes = require('./routes/category');
+const linkRoutes = require('./routes/link');
 
 // app midllewares
 app.use(morgan('dev'));
@@ -31,6 +33,7 @@ app.use(cors({origin:process.env.CLIENT_URL}));
 app.use('/api', authRoutes);
 app.use('/api', userRoutes);
 app.use('/api', categoryRoutes);
+app.use('/api', linkRoutes);
 
 const PORT = process.env.PORT || 8000;
 
